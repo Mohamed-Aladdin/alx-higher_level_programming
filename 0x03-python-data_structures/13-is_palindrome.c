@@ -27,19 +27,19 @@ int is_palindrome(listint_t **head)
 
 	while (current != NULL)
 	{
-		arr[i] = current->n;
-		i++;
+		arr[x] = current->n;
+		x++;
 		current = current->next;
 	}
-	i--;
+	x--;
 	len--;
 
-	while (i >= len / 2)
+	while (x >= len / 2)
 	{
-		if (arr[i] != arr[j])
+		if (arr[x] != arr[y])
 			return (0);
-		i--;
-		j++;
+		x--;
+		y++;
 	}
 	return (1);
 }
