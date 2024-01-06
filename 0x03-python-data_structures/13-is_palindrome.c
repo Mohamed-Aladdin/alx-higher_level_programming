@@ -29,7 +29,7 @@ int is_palindrome(listint_t **head)
 	{
 		arr[i] = current->n;
 		i++;
-		current = current->next
+		current = current->next;
 	}
 	i--;
 	len--;
