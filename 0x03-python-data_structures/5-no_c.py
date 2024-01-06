@@ -2,8 +2,8 @@
 def no_c(my_string):
     temp = ""
 
-    for c in my_string:
-        if c != 'C' and c != 'c':
-            temp += c
+    for letter in my_string:
+        if letter != 'C' and letter != 'c':
+            temp += letter
 
         return (temp)
