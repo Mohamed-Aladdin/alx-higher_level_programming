@@ -14,37 +14,35 @@ void print_python_float(PyObject *p);
 
 void print_python_bytes(PyObject *p)
 {
-	long int s, i, l;
-	char *str;
+	Py_ssize_t s, i;
+	PyBytesObject *bt = (PyBytesObject *)p;
+
+	fflush(stdout);
 
 	printf("[.] bytes object info\n");
-
-	if (!PyBytes_Check(p))
+	if (strcmp(p->ob_type->tp_name, "bytes") != 0)
 	{
 		printf("  [ERROR] Invalid Bytes Object\n");
 		return;
 	}
-	s = ((PyVarObject *)(p))->ob_size;
-	str = ((PyBytesObject *)p)->ob_sval;
 
-	printf("  size: %ld\n", s);
-	printf("  trying string: %s\n", str);
+	printf("  size: %ld\n", ((PyVarObject *)p)->ob_size);
+	printf("  trying string: %s\n", bt->ob_sval);
 
-	if (s >= 10)
-		l = 10;
+	if (((PyVarObject *)p)->ob_size >= 10)
+		s = 10;
 	else
-		l = s + 1;
-	printf("  first %ld bytes:", l);
+		s = ((PyVarObject *)p)->ob_size + 1;
 
-	for (i = 0; i < l; i++)
+	printf("  first %ld bytes: ", s);
+	for (i = 0; i < s; i++)
 	{
-		if (str[i] >= 0)
-			printf(" %02x", str[i]);
+		printf("%02hhx", bt->ob_sval[i]);
+		if (i == (s - 1))
+			printf("\n");
 		else
-			printf(" %02x", 256 + str[i]);
+			printf(" ");
 	}
-
-	printf("\n");
 }
 
 /**
@@ -56,24 +54,34 @@ void print_python_bytes(PyObject *p)
 
 void print_python_list(PyObject *p)
 {
-	PyListObject *l;
-	PyObject *ob;
-	long int s, i;
+	Py_ssize_t s, a, i;
+	const char *t;
+	PyListObject *l = (PyListObject *)p;
+	PyVarObject *v = (PyVarObject *)p;
 
-	s = ((PyVarObject *)(p))->ob_size;
-	l = (PyListObject *)p;
+	s = v->ob_size;
+	a = l->allocated;
+
+	fflush(stdout);
 
 	printf("[*] Python list info\n");
+	if (strcmp(p->ob_type->tp_name, "list") != 0)
+	{
+		printf("  [ERROR] Invalid List Object\n");
+		return;
+	}
+
 	printf("[*] Size of the Python List = %ld\n", s);
-	printf("[*] Allocated = %ld\n", l->allocated);
+	printf("[*] Allocated = %ld\n", a);
 
 	for (i = 0; i < s; i++)
 	{
-		ob = ((PyListObject *)p)->ob_item[i];
-		printf("Element %ld: %s\n", i, ((ob)->ob_type)->tp_name);
-
-		if (PyBytes_Check(ob))
-			print_python_bytes(ob);
+		t = l->ob_item[i]->ob_type->tp_name;
+		printf("Element %ld: %s\n", i, t);
+		if (strcmp(t, "bytes") == 0)
+			print_python_bytes(l->ob_item[i]);
+		else if (strcmp(t, "float") == 0)
+			print_python_float(l->ob_item[i]);
 	}
 }
 
