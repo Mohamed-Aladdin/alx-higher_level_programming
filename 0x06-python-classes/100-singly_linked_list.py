@@ -57,7 +57,7 @@ class SinglyLinkedList:
         pos = self.head
 
         while pos:
-            ssl += str(pos.data) + "\n"
+            sll += str(pos.data) + "\n"
             pos = pos.next_node
         return sll[:-1]
 
