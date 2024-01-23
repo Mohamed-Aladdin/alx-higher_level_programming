@@ -12,7 +12,7 @@ class Square:
             size: length of side of Square
         """
 
-        self.size = size
+        self.__size = size
 
     @property
     def size(self):
@@ -40,4 +40,4 @@ class Square:
         Returns: The size squared
         """
 
-        return self.__size * self.__size
+        return (self.__size * self.__size)
