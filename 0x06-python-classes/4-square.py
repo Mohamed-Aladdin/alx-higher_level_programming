@@ -12,7 +12,7 @@ class Square:
             size: length of side of Square
         """
 
-        self.__size = size
+        self.size = size
 
     @property
     def size(self):
