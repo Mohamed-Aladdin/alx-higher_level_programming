@@ -19,7 +19,7 @@ class Square:
     def __str__(self):
         """To print the square"""
 
-        return self.pos_print()[:=1]
+        return self.pos_print()[:-1]
 
     @property
     def size(self):
