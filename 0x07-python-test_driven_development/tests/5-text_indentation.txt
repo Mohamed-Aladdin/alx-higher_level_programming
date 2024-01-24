@@ -1,0 +1,91 @@
+the ``text_indentation`` module
+===============================
+
+using ``text_indentation``
+--------------------------
+
+First import ``text_indentation``:
+
+	>>> text_indentation = __import__('5-text_indentation').text_indentation
+
+Test: normal example containing the 3 special characters:
+
+	>>> text_indentation("Hello? I am Tabitha. It's 10:00")
+	Hello?
+	<BLANKLINE>
+	I am Tabitha.
+	<BLANKLINE>
+	It's 10:
+	<BLANKLINE>
+	00
+
+Test: no string argument was given:
+
+	>>> text_indentation(42)
+	Traceback (most recent call last):
+	...
+	TypeError: text must be a string
+
+Test: no special characters:
+
+	>>> text_indentation("Hello")
+	Hello
+
+Test: only special characters were given:
+
+	>>> text_indentation("?.:")
+	?
+	<BLANKLINE>
+	.
+	<BLANKLINE>
+	:
+	<BLANKLINE>
+
+Test: special characters with spaces around them:
+
+	>>> text_indentation("  ?  :  .  ")
+	?
+	<BLANKLINE>
+	:
+	<BLANKLINE>
+	.
+	<BLANKLINE>
+
+Test: None as an argument:
+
+	>>> text_indentation(None)
+	Traceback (most recent call last):
+	...
+	TypeError: text must be a string
+
+Test: spaces only:
+
+	>>> text_indentation("Hello   ")
+	Hello
+
+Test: spaces around special characters:
+
+	>>> text_indentation("Hello   ?")
+	Hello?
+	<BLANKLINE>
+
+Test: no arguments were given:
+
+	>>> text_indentation()
+	Traceback (most recent call last):
+	...
+	TypeError: text_indentation() missing 1 required positional argument: 'text'
+
+Test: NaN is given:
+
+	>>> text_indentation(float('nan'))
+	Traceback (most recent call last):
+	...
+	TypeError: text must be a string
+
+Test: infinity given:
+
+	>>> text_indentation(float('inf'))
+	Traceback (most recent call last):
+	...
+	TypeError: text must be a string
