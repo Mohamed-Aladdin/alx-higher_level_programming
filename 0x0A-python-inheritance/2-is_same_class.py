@@ -2,9 +2,9 @@
 """module of the same class function"""
 
 
-def lookup(obj):
+def is_same_class(obj, a_class):
     """
-    returns a list of available attributes and methods of an object
+    checks class and instances
     Args:
         obj: the object we are looking up
         a_class: the given class
