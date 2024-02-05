@@ -1,0 +1,148 @@
+``7-base_geometry`` module
+==========================
+
+using ``7-base_geometry:
+------------------------
+
+first, import function from module:
+	>>> BaseGeometry = __import__('7-base_geometry').BaseGeometry
+
+Test 0: class is type BaseGeometry:
+
+	>>> test = BaseGeometry()
+	>>> type(test) == BaseGeometry
+	True
+
+Test 1: undefinded area method is an instance method:
+
+	>>> type(BaseGeometry.__dict__['area'])
+	<class 'function'>
+
+Test 2: area normal behavior:
+
+	>>> test.area()
+	Traceback (most recent call last):
+	...
+	Exception: area() is not implemented
+
+Test 3: no args for area:
+
+	>>> test.__class__.area()
+	Traceback (most recent call last):
+	...
+	TypeError: area() missing 1 required positional argument: 'self'
+
+Test 4: single additional arg for area:
+
+	>>> test.area(7)
+	Traceback (most recent call last):
+	...
+	TypeError: area() takes 1 positional argument but 2 were given
+
+Test 5: two extra args for area:
+
+	>>> test.area(1, 7)
+	Traceback (most recent call last):
+	...
+	TypeError: area() takes 1 positional argument but 3 were given
+
+Test 6: integer_validator method is an instance method:
+
+	>>> type(BaseGeometry.__dict__['integer_validator'])
+	<class 'function'>
+
+Test 7: int validator normal behavior:
+
+	>>> test.integer_validator("size", 5)
+
+Test 8: int validator normal 2:
+
+	>>> test.integer_validator("key", 10)
+
+Test 9: call int val via class no args:
+
+	>>> test.__class__.integer_validator()
+	Traceback (most recent call last):
+	...
+	TypeError: integer_validator() missing 3 required positional arguments: 'self', 'name', and 'value'
+
+Test 10: send no arg in call:
+
+	>>> test.integer_validator()
+	Traceback (most recent call last):
+	...
+	TypeError: integer_validator() missing 2 required positional arguments: 'name' and 'value'
+
+Test 11: send lots of args:
+
+	>>> test.integer_validator(1, 8, 7)
+	Traceback (most recent call last):
+	...
+	TypeError: integer_validator() takes 3 positional arguments but 4 were given
+
+Test 12: give a float as value:
+
+	>>> test.integer_validator("impeach", 4.5)
+	Traceback (most recent call last):
+	...
+	TypeError: impeach must be an integer
+
+Test 13: send string instead of int:
+
+	>>> test.integer_validator("impeach", "trump")
+	Traceback (most recent call last):
+	...
+	TypeError: impeach must be an integer
+
+Test 14: send None instead of value:
+
+	>>> test.integer_validator("hello", None)
+	Traceback (most recent call last):
+	...
+	TypeError: hello must be an integer
+
+Test 15: send True instead of value:
+
+	>>> test.integer_validator("pythoniscool", True)
+	Traceback (most recent call last):
+	...
+	TypeError: pythoniscool must be an integer
+
+Test 16: send it a list:
+
+	>>> test.integer_validator("list", [1])
+	Traceback (most recent call last):
+	...
+	TypeError: list must be an integer
+
+Test 17: give it 0:
+
+	>>> test.integer_validator("zero", 0)
+	Traceback (most recent call last):
+	...
+	ValueError: zero must be greater than 0
+
+Test 18: give it a negative int:
+
+	>>> test.integer_validator("negative", -187)
+	Traceback (most recent call last):
+	...
+	ValueError: negative must be greater than 0
+
+Test 19: empty string ok value:
+
+	>>> test.integer_validator("", 1)
+
+Test 20: tuple instead of int:
+
+	>>> test.integer_validator("test", (1, 8, 7))
+	Traceback (most recent call last):
+	...
+	TypeError: test must be an integer
+
+Test 21: how about a dictionary?:
+
+	>>> test.integer_validator("dictionary", {1, 8})
+	Traceback (most recent call last):
+	...
+	TypeError: dictionary must be an integer
