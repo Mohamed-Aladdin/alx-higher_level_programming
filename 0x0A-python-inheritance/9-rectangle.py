@@ -17,8 +17,10 @@ class Rectangle(list):
 
     def area(self):
         """calculates the area of rectangle"""
+
         return self.__width * self.__height
 
     def __str__(self):
         """str rep function for rectangle"""
-        return "[Rectangle] " + str(self.__width) + "/" + str(self.__height)
+
+        return("[Rectangle] {}/{}".format(self.__width, self.__height))
