@@ -3,7 +3,7 @@
 
 CREATE TABLE IF NOT EXISTS second_table (
 	id INT,
-	name VARRCHAR(256),
+	name VARCHAR(256),
 	score INT
 ) ENGINE=INNODB;
 
