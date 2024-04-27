@@ -11,6 +11,6 @@ if __name__ == "__main__":
     email = sys.argv[2]
 
     content = parse.urlencode({"email": email}).encode("ascii")
-    data = request.Request(url, data)
+    data = request.Request(url, content)
     with request.urlopen(data) as result:
         print(result.read().decode("utf-8"))
